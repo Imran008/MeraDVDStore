@@ -1,0 +1,103 @@
+﻿@model PasSionDvDsTorE.Models.Product  
+
+<link href="~/assets/css/jquery.fancybox.css" rel="stylesheet" />
+<script src="~/assets/Scripts/jquery-1.10.1.min1.js"></script>
+<script src="~/assets/Scripts/jquery.fancybox.js"></script>
+
+<script>
+    $(document).ready(function () {
+        /*
+         *  Simple image gallery. Uses default settings
+         */
+
+        $('.fancybox').click(function () {
+            $('.fancybox').fancybox({
+                wrapCSS: 'fancybox-custom',
+                closeClick: true,
+
+                openEffect: 'none',
+
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    },
+                    overlay: {
+                        css: {
+                            'background': 'rgba(238,238,238,0.85)'
+                        }
+                    }
+                }
+            });
+        });
+
+    });
+
+    </script>
+
+<div class="content-bg">
+        <div class="wrap">
+            <div class="main">
+                <div class="content">
+                    <h2>Specials</h2>
+                    <div class="section group">
+                        <div class="cont">
+                            <div class="single">
+                                <div class="grid-img1">
+                                     <a id="pic1" class="fancybox" href="~/images/pic1.jpg"><img src="~/images/pic1.jpg" alt="" /></a>
+                                </div>
+                                
+                                <div class="para">
+                                    <h4>@Model.Name</h4>
+                                    <form id="f_1" method="post" action="/User/addinbasket">
+                                        <input type="hidden" name="id" value="@Model.Id" />
+                                    <div class="cart-b">
+                                        <div class="price left">$@Model.Price</div>
+                                        <br />
+                                        <br />
+                                        @if(Model.Quantity!=0)
+                                        {
+                                            <div >Quantity: </div>
+                                            <select name="Q" id="q1">
+                                                <option value="0">0</option>
+                                                @for(int i=1; i<=@Model.Quantity; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            </select>
+                                            
+                                                <input type="submit" value="Add to Basket" />
+                                        }
+                                        else
+                                        {
+                                            <div >Out of Stock</div>
+                                        }
+                                        <div class="clear"></div>
+                                    </div>
+                                    </form>
+
+                                    <h3>@Model.Name</h3>
+                                    <p>@Model.Details</p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="text-h1 top">
+                                <h2>Latest Movies</h2>
+                            </div>
+                            <div class="div2">
+                                <div id="mcts1">
+                                    <img src="~/images/pic4.jpg" alt="" />
+                                    <img src="~/images/pic5.jpg" alt="" />
+                                    <img src="~/images/pic6.jpg" alt="" />
+                                    <img src="~/images/pic7.jpg" alt="" />
+                                    <img src="~/images/pic8.jpg" alt="" />
+                                    <img src="~/images/pic5.jpg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>

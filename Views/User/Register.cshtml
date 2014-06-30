@@ -1,0 +1,165 @@
+﻿@model PasSionDvDsTorE.Models.User
+
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+
+
+<link href="~/assets/css/bootstrap.css" rel="stylesheet" />
+<link href="~/assets/css/style1.css" rel="stylesheet" />
+
+<link href="~/assets/css/bootstrap.css" rel="stylesheet" />
+<link href="~/assets/css/style.css" rel="stylesheet" />
+
+<link href="~/assets/css/jquery.fancybox.css" rel="stylesheet" />
+<script src="~/assets/Scripts/jquery-1.10.1.min1.js"></script>
+<script src="~/assets/Scripts/jquery.fancybox.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#Fname').focusout(function () {
+
+            var userName = $('#Fname').val();
+
+            //alert('User Name ='+ userName);
+            $.getJSON("/user/CheckUserName?Fname=" + userName, function (data) {
+                if (data) {
+                    alert("User Name Already Exits.")
+                    $('#Fname').val("");
+                }
+            });
+
+        });
+    }
+    );
+
+    $(document).ready(function () {
+        $('#inputConfirmPassword').focusout(function () {
+            if ($('#inputPassword').val() != $('#inputConfirmPassword').val()) {
+                alert("Password Mismatch")
+                $('#inputPassword').val("");
+                $('#inputConfirmPassword').val("");
+            }
+        });
+    }
+    );
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        /*
+         *  Simple image gallery. Uses default settings
+         */
+       if( $('#imgH').val()!="/Files/profile.jpg") {
+               $('#imgDiv').hide();
+        }
+
+
+        $('#pic1').click(function () {
+            $('#pic1').fancybox({
+                wrapCSS: 'fancybox-custom',
+                closeClick: true,
+
+                openEffect: 'none',
+
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    },
+                    overlay: {
+                        css: {
+                            'background': 'rgba(238,238,238,0.85)'
+                        }
+                    }
+                }
+            });
+            
+        });
+    });
+    </script>
+
+<div class="span12">
+    <ul class="breadcrumb">
+		<li><a href="/Home/Index">Passion'sDVD</a> <span class="divider">/</span></li>
+		<li class="active">Registration</li>
+    </ul>
+	<div class="well">
+        <h2>Your personal information</h2>
+        <h5>Profile Image:</h5>
+        <form id="ff1" action="/user/UploadImg" method="post" enctype = "multipart/form-data">
+            <a id="pic1" href="@ViewBag.x" style="width:500px"><img src="@ViewBag.x" style="width:120px; height:120px" id="img1"/></a>
+            <div id="imgDiv"><input type="file" name="image" class="control-group"/>
+                <br />
+                <input type="hidden" value="@ViewBag.x" name="imgH" id="imgH"/>
+            <input type="submit" value="Upload" id="submit" />
+                </div>
+
+        </form>
+        
+        
+        <form id="f1" class="form-horizontal" action="/User/addCustomer" method="post"> 
+            <input type="hidden" name="ImagePath" value="@ViewBag.x"/>
+            <div class="control-group">
+                    <label class="control-label" for="inputFname">First name <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Fname, new {placeholder="First Name"})
+                        @Html.ValidationMessageFor(x=>x.Fname)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputLname">Last name <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Lname, new {placeholder="Last Name"})
+                        @Html.ValidationMessageFor(x=>x.Lname)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Email, new {type="email", placeholder="Your Email"})
+                        @Html.ValidationMessageFor(x=>x.Email)
+                    </div>        
+                </div>
+                
+                
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Password <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Password, new {placeholder="Password", id="inputPassword", type="password"})
+                        @Html.ValidationMessageFor(x=>x.Password)
+                    </div>
+                    
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Re-Enter Password <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Password, new {placeholder="Password", id="inputConfirmPassword", type="password"})
+                        @Html.ValidationMessageFor(x=>x.Password)
+                    </div>
+                </div>
+
+                <h3>Your address</h3>
+                <div class="control-group">
+                    <label class="control-label" for="adress">Address<sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextAreaFor(x=>x.Address)
+                        @Html.ValidationMessageFor(x=>x.Address)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="phone">Phone <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Phone)
+                        @Html.ValidationMessageFor(x=>x.Phone)
+                    </div>
+                    <sup>*</sup>Required fields
+                    <input class="btn btn-large" type="submit" value="Register" id="sub" />
+                </div>                
+        </form>
+    </div>
+</div>

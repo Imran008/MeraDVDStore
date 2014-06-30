@@ -1,0 +1,68 @@
+﻿@model PasSionDvDsTorE.Models.User
+
+@{
+    Layout =  "~/Views/Shared/_Layout1.cshtml";
+}
+<link href="~/assets/css/bootstrap.css" rel="stylesheet" />
+<link href="~/assets/css/style.css" rel="stylesheet" />
+
+     <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="/Home/Index">Home</a> <span class="divider">/</span></li>
+            <li class="active">Login</li>
+        </ul>
+        <h3> Login</h3>
+        
+        <div class="row">
+            <div class="span4">
+                <div class="well">
+                    <h4>NOT A MEMBER ?</h4>
+
+                    <h5>CREATE YOUR ACCOUNT</h5><br /><br /><br />
+                    Please Click Below buttoon to get registered<br /><br />
+                    <form action="/User/Register" method="post">
+                        <div class="controls">
+                            <button type="submit" class="btn block">Create Your Account</button>
+                        </div>
+
+                    </form>
+                    <script>
+                        $('#B1').click(function () {
+                            $('#d1').clear();
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="span1"> &nbsp;</div>
+            <div class="span4">
+                <div class="well">
+                    <h4>ALREADY REGISTERED ?</h4>
+                    <form action="/User/LoginAuthority" method="post">
+                        <div class="control-group">
+                            <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
+                            <div class="controls">
+                                @Html.TextBoxFor(x=>x.Email, new {type="email", placeholder="Your Email"})
+                                @Html.ValidationMessageFor(x=>x.Email)
+                            </div>        
+                        </div>
+                        
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">Password <sup>*</sup></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(x=>x.Password, new {placeholder="Password", id="inputPassword", type="password"})
+                        @Html.ValidationMessageFor(x=>x.Password)
+                                  <div id="d1" style="color:red">@ViewBag.x</div>
+                    </div>
+                    
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" value="Sign in" /><a href="/User/Forgetpassword">Forget password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
